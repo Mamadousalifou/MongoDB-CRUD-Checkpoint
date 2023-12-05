@@ -1,0 +1,58 @@
+// Étape 1: Créer une base de données appelée « contact »
+use contact
+
+// Étape 2: Créer une collection appelée « liste de contacts »
+db.createCollection("liste de contacts")
+
+// Étape 3: Insérer des documents dans la « liste de contacts »
+db['liste de contacts'].insertMany([
+  {
+    Nom: "Ben Lahmer",
+    Prénom: "Fares",
+    Email: "fares@gmail.com",
+    Âge: 26
+  },
+  {
+    Nom: "Kefi",
+    Prénom: "Seif",
+    Email: "kefi@gmail.com",
+    Âge: 15
+  },
+  {
+    Nom: "Fatnassi",
+    Prénom: "Sarra",
+    Email: "sarra.f@gmail.com",
+    Âge: 40
+  },
+  {
+    Nom: "Ben Yahia",
+    Prénom: "Rym",
+    Âge: 4
+  },
+  {
+    Nom: "Cherif",
+    Prénom: "Sami",
+    Âge: 3
+  }
+])
+
+// Étape 4: Affichez l'ensemble de la liste des contacts
+db['liste de contacts'].find()
+
+// Étape 5: Affichez toutes les informations concernant une seule personne à l’aide de son identifiant
+db['liste de contacts'].findOne({ Prénom: "Fares" })
+
+// Étape 6: Affichez tous les contacts âgés >18 ans
+db['liste de contacts'].find({ Âge: { $gt: 18 } })
+
+// Étape 7: Affichez tous les contacts avec un âge >18 ans et un nom contenant « ah »
+db['liste de contacts'].find({ Âge: { $gt: 18 }, Nom: { $regex: /ah/ } })
+
+// Étape 8: Changez le prénom du contact de « Kefi Seif » à « Kefi Anis »
+db['liste de contacts'].updateOne({ Prénom: "Seif" }, { $set: { Prénom: "Anis" } })
+
+// Étape 9: Supprimez les contacts âgés de moins de 5 ans
+db['liste de contacts'].deleteMany({ Âge: { $lt: 5 } })
+
+// Étape 10: Affichez l'ensemble de la liste des contacts après les modifications
+db['liste de contacts'].find()
